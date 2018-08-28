@@ -18,12 +18,10 @@ import android.view.Window;
 
 import com.facebook.react.bridge.ReadableMap;
 
-import javax.crypto.Cipher;
-
 public class FingerprintDialog extends DialogFragment implements FingerprintHandler.Callback {
 
     private FingerprintManager.CryptoObject mCryptoObject;
-    private com.rnfingerprint.FingerprintDialog.DialogResultListener dialogCallback;
+    private DialogResultListener dialogCallback;
     private FingerprintHandler mFingerprintHandler;
     private boolean isAuthInProgress;
 
@@ -113,7 +111,7 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
         this.mCryptoObject = cryptoObject;
     }
 
-    public void setDialogCallback(com.rnfingerprint.FingerprintDialog.DialogResultListener newDialogCallback) {
+    public void setDialogCallback(DialogResultListener newDialogCallback) {
         this.dialogCallback = newDialogCallback;
     }
 
