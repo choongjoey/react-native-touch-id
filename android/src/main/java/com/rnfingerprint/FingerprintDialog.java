@@ -18,10 +18,12 @@ import android.view.Window;
 
 import com.facebook.react.bridge.ReadableMap;
 
+import javax.crypto.Cipher;
+
 public class FingerprintDialog extends DialogFragment implements FingerprintHandler.Callback {
 
     private FingerprintManager.CryptoObject mCryptoObject;
-    private DialogResultListener dialogCallback;
+    private com.rnfingerprint.FingerprintDialog.DialogResultListener dialogCallback;
     private FingerprintHandler mFingerprintHandler;
     private boolean isAuthInProgress;
 
@@ -29,6 +31,7 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
     private int dialogColor = 0;
     private String dialogTitle = "";
     private int dialogTitleSize = 20;
+    private int countError = 0;
 
     @Override
     public void onAttach(Context context) {
@@ -110,7 +113,7 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
         this.mCryptoObject = cryptoObject;
     }
 
-    public void setDialogCallback(DialogResultListener newDialogCallback) {
+    public void setDialogCallback(com.rnfingerprint.FingerprintDialog.DialogResultListener newDialogCallback) {
         this.dialogCallback = newDialogCallback;
     }
 
@@ -153,9 +156,15 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
 
     @Override
     public void onError(String errorString) {
-        this.isAuthInProgress = false;
-        this.dialogCallback.onError(errorString);
-        dismiss();
+        this.countError++;
+        if(this.countError < 3) {
+            this.isAuthInProgress = true;
+            this.mFingerprintHandler.startAuth(mCryptoObject);
+        } else {
+            this.isAuthInProgress = false;
+            this.dialogCallback.onError(errorString);
+            dismiss();
+        }
     }
 
     @Override
