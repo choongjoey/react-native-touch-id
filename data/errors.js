@@ -9,7 +9,12 @@ const codes = {
     LAErrorTouchIDNotEnrolled: 'LAErrorTouchIDNotEnrolled',
     LAErrorTouchIDLockout: 'LAErrorTouchIDLockout',
     RCTTouchIDNotSupported: 'RCTTouchIDNotSupported',
-    RCTTouchIDUnknownError: 'RCTTouchIDUnknownError'
+    RCTTouchIDUnknownError: 'RCTTouchIDUnknownError',
+    LAErrorBiometryLockout: 'LAErrorBiometryLockout',
+    LAErrorBiometryNotAvailable: 'LAErrorBiometryNotAvailable',
+    LAErrorBiometryNotEnrolled: 'LAErrorBiometryNotEnrolled',
+    LAErrorInvalidContext: 'LAErrorInvalidContext',
+    LAErrorNotInteractive: 'LAErrorNotInteractive'
   },
   androidApiCodes: {
     FINGERPRINT_ERROR_HW_UNAVAILABLE: 'FINGERPRINT_ERROR_HW_UNAVAILABLE',

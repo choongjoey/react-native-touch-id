@@ -35,7 +35,8 @@ const getError = (code) => {
   case codes.androidApiCodes.FINGERPRINT_ERROR_CANCELED:
     return errors.SYSTEM_CANCELED;
 
-  case codes.iOSCodes.LAErrorTouchIDNotAvailable: // does this mean hw not present rather than not available?
+  case codes.iOSCodes.LAErrorTouchIDNotAvailable: // DEPRECATED does this mean hw not present rather than not available?
+  case codes.iOSCodes.LAErrorBiometryNotAvailable: // handle new LAError
   case codes.androidApiCodes.FINGERPRINT_ERROR_HW_UNAVAILABLE:
   case codes.androidModuleCodes.NOT_AVAILABLE:
     return errors.NOT_AVAILABLE;
@@ -44,7 +45,8 @@ const getError = (code) => {
   case codes.androidModuleCodes.NOT_SUPPORTED:
     return errors.NOT_SUPPORTED;
 
-  case codes.iOSCodes.LAErrorTouchIDNotEnrolled:
+  case codes.iOSCodes.LAErrorTouchIDNotEnrolled: // DEPRECATED
+  case codes.iOSCodes.LAErrorBiometryNotEnrolled:
   case codes.androidApiCodes.FINGERPRINT_ERROR_NO_FINGERPRINTS:
   case codes.androidModuleCodes.NOT_ENROLLED:
     return errors.NOT_ENROLLED;
@@ -73,8 +75,13 @@ const getError = (code) => {
   case codes.iOSCodes.LAErrorUserFallback:
     return errors.USER_FALLBACK;
 
-  case codes.iOSCodes.LAErrorTouchIDLockout:
+  case codes.iOSCodes.LAErrorTouchIDLockout: // DEPRECATED
+  case codes.iOSCodes.LAErrorBiometryLockout:
     return errors.LOCKOUT;
+
+  case codes.iOSCodes.LAErrorInvalidContext:
+  case codes.iOSCodes.LAErrorNotInteractive:
+    return errors.PROCESSING_ERROR;
 
   default:
     return errors.UNKNOWN_ERROR;
